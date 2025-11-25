@@ -7,12 +7,12 @@ const RECENT_SEARCHES_KEY = '@pharmacy-recent-searches';
 const MAX_RECENT_SEARCHES = 10;
 
 export interface RecentSearch {
-    medecineId: number
+    medecineId: number | string
     medecineName: string
     searchedAt: Date | number[] | string | number
 }
 
-export const [RecentSearchesContext, RecentSearchesProvider] = createContextHook(() => {
+export const [RecentSearchesContext, useRecentSearches] = createContextHook(() => {
     const queryClient = useQueryClient();
 
     const recentSearchesQuery = useQuery<RecentSearch[]>({
@@ -36,7 +36,7 @@ export const [RecentSearchesContext, RecentSearchesProvider] = createContextHook
     const { mutate: saveSearches } = saveMutation;
 
     const addRecentSearch = useCallback(
-        (medecineId: number, medecineName: string) => {
+        (medecineId: number | string, medecineName: string) => {
             const currentSearches = recentSearchesQuery.data || [];
             const existingIndex = currentSearches.findIndex(s => s.medecineId === medecineId);
 
