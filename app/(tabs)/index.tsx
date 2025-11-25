@@ -16,7 +16,7 @@ export default function HomePage() {
   const searchInputRef = useRef<TextInput>(null);
   const animatedValue = useRef(new Animated.Value(0)).current;
 
-  const filetredMedications = useMemo(() => {
+  const filteredMedications = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const query = searchQuery.toLowerCase().trim()
     return medicines.filter((medecine) => {
@@ -117,11 +117,11 @@ export default function HomePage() {
 
       {searchQuery.trim() ? (
         <View style={styles.content}>
-          {filetredMedications.length > 0 ? (
+          {filteredMedications.length > 0 ? (
             <>
-            <Text style={styles.sectionTitle}>résultat{filetredMedications.length > 1 ? 's' : ''}</Text>
+            <Text style={styles.sectionTitle}>résultat{filteredMedications.length > 1 ? 's' : ''}</Text>
             <FlatList 
-              data={filetredMedications} 
+              data={filteredMedications}
               renderItem={renderMedecineItem}
               keyExtractor={item => item.id}
               showsVerticalScrollIndicator={false}
