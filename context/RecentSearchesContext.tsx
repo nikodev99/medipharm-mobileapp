@@ -9,7 +9,7 @@ const MAX_RECENT_SEARCHES = 10;
 export interface RecentSearch {
     medecineId: number | string
     medecineName: string
-    searchedAt: Date | number[] | string | number
+    searchedAt: number
 }
 
 export const [RecentSearchesContext, useRecentSearches] = createContextHook(() => {
@@ -29,7 +29,7 @@ export const [RecentSearchesContext, useRecentSearches] = createContextHook(() =
             return searches;
         },
         onSuccess: (data) => {
-            queryClient.setQueryData(["recentSearches"], data);
+            queryClient.setQueryData([RECENT_SEARCHES_KEY], data);
         }
     })
 
