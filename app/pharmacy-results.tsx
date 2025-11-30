@@ -1,10 +1,11 @@
-import {Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Linking, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {Stack, useLocalSearchParams, useRouter} from "expo-router";
 import {useMemo} from "react";
 import {medicines} from "@/api/medecine";
 import {pharmacies, pharmacyStocks} from "@/api/pharmacies";
 import colors from "@/constants/colors";
 import {Clock, MapPin, Phone} from "lucide-react-native";
+import {handleCall} from "@/helper/helper";
 
 export default function PharmacyResults() {
     const router = useRouter()
@@ -31,22 +32,13 @@ export default function PharmacyResults() {
         })
     }
 
-    const handleCall = (phone: string) => {
-        const phoneNumber = Platform.select({
-            ios: `telprompt:${phone}`,
-            android: `tel:${phone}`
-        })
-
-        if (!medecine) {
-            return(
-                <View style={styles.container}>
-                    <Text style={styles.errorText}>Médicament non trouvé</Text>
-                </View>
-            )
-        }
+    if (!medecine) {
+        return(
+            <View style={styles.container}>
+                <Text style={styles.errorText}>Médicament non trouvé</Text>
+            </View>
+        )
     }
-
-    console.log('Pharmacy results Mounted')
 
     return(
         <>
