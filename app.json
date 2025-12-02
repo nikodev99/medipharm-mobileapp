@@ -1,26 +1,33 @@
 {
   "expo": {
     "name": "Medipharm",
-    "slug": "medipharm-mobileapp",
+    "slug": "medipharm",
     "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "./assets/images/light/apple-icon.png",
+    "icon": "./assets/images/medipharm-icon.png",
     "scheme": "medipharmmobileapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.gu.medipharm"
+      "bundleIdentifier": "com.gu.medipharm",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/light/android-icon-72x72.png",
+        "foregroundImage": "./assets/images/medipharm-icon.png",
         "backgroundImage": "./assets/images/light/android-icon-192x192.png",
         "monochromeImage": "./assets/images/light/android-icon-96x96.png"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.gu.medipharm"
+      "package": "com.gu.medipharm",
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "output": "static",
@@ -53,6 +60,16 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "046f63cc-740f-4bcc-acb9-f3a55c8efec3"
+      }
+    },
+    "owner": "global-underscore"
   }
 }

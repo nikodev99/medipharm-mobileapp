@@ -19,18 +19,18 @@ export default function HomePage() {
   const filteredMedications = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const query = searchQuery.toLowerCase().trim()
-    return medicines.filter((medecine) => {
-      return medecine.name.toLowerCase().includes(query) ||
-        medecine.genericName.toLowerCase().includes(query) ||
-        medecine.category.toLowerCase().includes(query)
+    return medicines.filter((medicine) => {
+      return medicine.name.toLowerCase().includes(query) ||
+        medicine.genericName.toLowerCase().includes(query) ||
+        medicine.category.toLowerCase().includes(query)
     })
   }, [searchQuery])
 
   const recentMedications = useMemo(() => {
     return recentSearches
       .map(search => medicines.find(m => m.id === search.medecineId))
-      .filter((medecine): medecine is Medicine => medecine !== undefined);
-  }, []);
+      .filter((medicine): medicine is Medicine => medicine !== undefined);
+  }, [recentSearches]);
 
   useEffect(() => {
     Animated.spring(animatedValue, {

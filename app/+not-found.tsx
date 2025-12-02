@@ -9,7 +9,7 @@ export default function NotFound() {
             <View style={styles.container}>
                 <Text style={styles.title}>Cette page n&apo;existe pas.</Text>
                 <Link href={'/'} style={styles.link}>
-                    <Text style={styles.linkText}>Retourner à l'&apo;accueil</Text>
+                    <Text style={styles.linkText}>Retourner à l&apo;accueil</Text>
                 </Link>
             </View>
         </>

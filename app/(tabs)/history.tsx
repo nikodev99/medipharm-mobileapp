@@ -43,8 +43,8 @@ export default function HistoryScreen() {
     }
 
     const renderMedecineItem = ({item}: {item: RecentSearch}) => {
-        const medecine = medicines.find(m => m.id === item.medecineId) as Medicine;
-        if (!medecine) return null;
+        const medicine = medicines.find(m => m.id === item.medecineId) as Medicine;
+        if (!medicine) return null;
 
         const timeAgo = getTimeAgo(item.searchedAt as number);
 
@@ -54,8 +54,8 @@ export default function HistoryScreen() {
                     <Clock size={20} color={colors.ligth.primary} />
                 </View>
                 <View style={styles.historyInfo}>
-                    <Text style={styles.historyName}>{medecine.name}</Text>
-                    <Text style={styles.historyGeneric}>{medecine.genericName}</Text>
+                    <Text style={styles.historyName}>{medicine.name}</Text>
+                    <Text style={styles.historyGeneric}>{medicine.genericName}</Text>
                     <Text style={styles.historyTime}>{timeAgo}</Text>
                 </View>
                 <ChevronRight size={20} color={colors.ligth.textTertiary} />

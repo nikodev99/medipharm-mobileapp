@@ -43,7 +43,7 @@ export const [RecentSearchesContext, useRecentSearches] = createContextHook(() =
             let updatedSearches: RecentSearch[] = [];
             if (existingIndex !== -1) {
                 updatedSearches = [
-                    { medecineId, medecineName, searchedAt: Date.now() },
+                    { medecineId, medicineName: medecineName, searchedAt: Date.now() },
                     ...currentSearches.filter(s => s.medecineId !== medecineId)
                 ]
             }else {

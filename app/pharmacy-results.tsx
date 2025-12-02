@@ -1,4 +1,4 @@
-import {Linking, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {Stack, useLocalSearchParams, useRouter} from "expo-router";
 import {useMemo} from "react";
 import {medicines} from "@/api/medecine";
@@ -9,30 +9,30 @@ import {handleCall} from "@/helper/helper";
 
 export default function PharmacyResults() {
     const router = useRouter()
-    const { medecineId } = useLocalSearchParams<{ medecineId: string }>()
+    const { medicineId } = useLocalSearchParams<{ medicineId: string }>()
 
-    const medecine = useMemo(() => medicines.find(m => m.id === medecineId), [medecineId])
+    const medicine = useMemo(() => medicines.find(m => m.id === medicineId), [medicineId])
     const availablePharmacies = useMemo(() => {
         const stocks = pharmacyStocks.filter(stock => {
-            return stock.medicineId === medecineId && stock.inStock
+            return stock.medicineId === medicineId && stock.inStock
         })
         return stocks.map(stock => {
             const pharmacy = pharmacies.find(pharmacy => pharmacy.id === stock.pharmacyId)
             return pharmacy ? { ...pharmacy, price: stock.price, stock } : null
         }).filter(p => p !== null)
-    }, [medecineId])
+    }, [medicineId])
 
     const routeToPharmacyDetails = (pharmacyId: string) => {
         router.push({
             pathname: '/pharmacy-details',
             params: {
                 pharmacyId: pharmacyId,
-                medecineId: medecineId
+                medecineId: medicineId
             }
         })
     }
 
-    if (!medecine) {
+    if (!medicine) {
         return(
             <View style={styles.container}>
                 <Text style={styles.errorText}>Médicament non trouvé</Text>
@@ -43,7 +43,7 @@ export default function PharmacyResults() {
     return(
         <>
             <Stack.Screen options={{
-                title: medecine?.name,
+                title: medicine?.name,
                 headerStyle: {
                     backgroundColor: colors.ligth.primary
                 },
@@ -53,13 +53,13 @@ export default function PharmacyResults() {
                 }
             }} />
             <ScrollView style={styles.container}>
-                <View style={styles.medecineInfoCard}>
-                    <Text style={styles.medecineName}>{medecine?.name}</Text>
-                    <Text style={styles.medecineGeneric}>{medecine?.genericName}</Text>
+                <View style={styles.medicineInfoCard}>
+                    <Text style={styles.medicineName}>{medicine?.name}</Text>
+                    <Text style={styles.medicineGeneric}>{medicine?.genericName}</Text>
                     <View style={styles.categoryBadge}>
-                        <Text style={styles.categoryText}>{medecine?.category}</Text>
+                        <Text style={styles.categoryText}>{medicine?.category}</Text>
                     </View>
-                    <Text style={styles.medecineDescription}>{medecine?.description}</Text>
+                    <Text style={styles.medecineDescription}>{medicine?.description}</Text>
                 </View>
 
                 <View style={styles.resultsHeader}>
@@ -124,18 +124,18 @@ const styles = StyleSheet.create({
         color: colors.ligth.error,
         textAlign: 'center',
     },
-    medecineInfoCard: {
+    medicineInfoCard: {
         backgroundColor: colors.ligth.surface,
         padding: 20,
         marginBottom: 8
     },
-    medecineName: {
+    medicineName: {
         fontSize: 22,
         fontWeight: '700' as const,
         color: colors.ligth.text,
         marginBottom: 4
     },
-    medecineGeneric: {
+    medicineGeneric: {
         fontSize: 16,
         color: colors.ligth.textSecondary,
         marginBottom: 12

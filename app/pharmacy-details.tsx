@@ -17,21 +17,21 @@ const generateText = (prompt: string) => {
 }
 
 export default function PharmacyDetails() {
-    const { pharmacyId, medecineId } = useLocalSearchParams<{
+    const { pharmacyId, medicineId } = useLocalSearchParams<{
         pharmacyId: string
-        medecineId: string
+        medicineId: string
     }>()
 
     const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set())
     const [aiExplanation, setAiExplanation] = useState<Map<string, string>>(new Map())
 
     const pharmacy = useMemo(() => pharmacies.find(p => p.id === pharmacyId), [pharmacyId])
-    const medecine = useMemo(() => medicines.find(m => m.id === medecineId), [medecineId])
+    const medicine = useMemo(() => medicines.find(m => m.id === medicineId), [medicineId])
 
     const leafletSections: LeafletSection[] = useMemo(() => [
         {
             title: 'Composition',
-            content: medecine?.name + "est classée parmi les anti-inflammatoires non stéroïdiens (AINS). Elle est utilisée pour " +
+            content: medicine?.name + "est classée parmi les anti-inflammatoires non stéroïdiens (AINS). Elle est utilisée pour " +
                 "ses propriétés antalgiques (soulage la douleur), antipyrétiques (réduit la fièvre) et antiagrégantes plaquettaires (fluidifie le sang)."
         },
         {
@@ -41,7 +41,7 @@ export default function PharmacyDetails() {
         },
         {
             title: "Posologie et mode d'administration",
-            content: 'L\'utilisation de ' + medecine?.name + ', surtout à fortes doses ou sur le long terme, n\'est pas anodine et ' +
+            content: 'L\'utilisation de ' + medicine?.name + ', surtout à fortes doses ou sur le long terme, n\'est pas anodine et ' +
                 'comporte des risques (notamment hémorragiques et gastro-intestinaux). Elle est également contre-indiquée ' +
                 'pour la douleur et la fièvre chez l\'enfant et l\'adolescent en cas d\'infection virale (risque de syndrome de Reye).'
         },
@@ -52,25 +52,25 @@ export default function PharmacyDetails() {
         },
         {
             title: 'Effets indésirables',
-            content: medecine?.name + '(Acide Acétylsalicylique - AAS) peut provoquer divers effets indésirables, dont la fréquence ' +
+            content: medicine?.name + '(Acide Acétylsalicylique - AAS) peut provoquer divers effets indésirables, dont la fréquence ' +
                 'et la gravité dépendent souvent de la dose et de la durée du traitement.'
         },
         {
             title: 'Interactions médicamenteuses',
-            content: medecine?.name + '(Acide Acétylsalicylique - AAS) interagit avec de nombreux médicaments, principalement en raison de ' +
+            content: medicine?.name + '(Acide Acétylsalicylique - AAS) interagit avec de nombreux médicaments, principalement en raison de ' +
                 'ses effets sur la coagulation sanguine et son impact sur la muqueuse digestive, ainsi que sa façon d\'être métabolisée.'
         },
         {
             title: 'Conservation',
-            content: 'La conservation de ' + medecine?.name + '(acide acétylsalicylique - AAS) est essentielle pour garantir son efficacité et sa ' +
+            content: 'La conservation de ' + medicine?.name + '(acide acétylsalicylique - AAS) est essentielle pour garantir son efficacité et sa ' +
                 'sécurité. L\'AAS est sensible à l\'humidité et à la chaleur, ce qui peut provoquer sa décomposition chimique.'
         },
-    ], [])
+    ], [medicine?.name])
 
     const explainWithAiMutation = useMutation({
         mutationFn: async (section: LeafletSection) => {
             const prompt = `Tu es un pharmacien expert qui explique les notices médicamenteuses en français simple. Voici 
-            une section d'une notice de médicament : médicament: ${medecine?.name}, Titre: ${section.title}. Explique en termes simples et
+            une section d'une notice de médicament : médicament: ${medicine?.name}, Titre: ${section.title}. Explique en termes simples et
             compréhensibles pour un patient, sans jargon médical complexe. Soi clair, garde un ton proféssionnel mais accessible.`
 
             const explanation = generateText(prompt)
@@ -99,7 +99,7 @@ export default function PharmacyDetails() {
         }
     }
 
-    if (!pharmacy || !medecine) {
+    if (!pharmacy || !medicine) {
         return(
             <View>
                 <Text>Information non disponible</Text>
