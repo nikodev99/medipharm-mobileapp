@@ -27,7 +27,7 @@ export default function PharmacyResults() {
             pathname: '/pharmacy-details',
             params: {
                 pharmacyId: pharmacyId,
-                medecineId: medicineId
+                medicineId: medicineId
             }
         })
     }

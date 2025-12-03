@@ -56,7 +56,7 @@ export default function HomePage() {
     router.push({
       pathname: '/pharmacy-results',
       params: {
-        medecineId: medecine.id,
+        medicineId: medecine.id,
       }
     });
   }
