@@ -5,6 +5,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RecentSearchesContext } from "@/context/RecentSearchesContext";
 import {useEffect} from "react";
 import {ThemeContext, useTheme} from "@/context/ThemeContext";
+import {SubscriptionContext} from "@/context/SubscriptionContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,12 +33,13 @@ export default function RootLayout() {
   return(
     <QueryClientProvider client={queryClient}>
         <ThemeContext>
-          <RecentSearchesContext>
-            <GestureHandlerRootView>
-              <StatusBar style="light" />
-              <RootLayoutNav />
-            </GestureHandlerRootView>
-          </RecentSearchesContext>
+            <SubscriptionContext>
+                <RecentSearchesContext>
+                    <GestureHandlerRootView>
+                        <RootLayoutNav />
+                    </GestureHandlerRootView>
+                </RecentSearchesContext>
+            </SubscriptionContext>
         </ThemeContext>
     </QueryClientProvider>
   )

@@ -3,6 +3,7 @@ import {Clock, Search, Settings, User} from "lucide-react-native"
 
 import colors from "@/constants/colors";
 import {StyleSheet, View} from "react-native";
+import AdBanner from "@/components/AdBanner";
 
 export default function TabLayout() {
     return(
@@ -38,6 +39,7 @@ export default function TabLayout() {
                     tabBarIcon: ({color, size}) => <Settings size={size} color={color} />
                 }} />
             </Tabs>
+            <AdBanner />
         </View>
     )
 }
