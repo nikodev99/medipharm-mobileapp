@@ -51,14 +51,14 @@ export default function HistoryScreen() {
         return(
             <TouchableOpacity style={styles.historyItem} onPress={() => handleMedicationPress(item.medecineId as string)}>
                 <View style={styles.historyItemContainer}>
-                    <Clock size={20} color={colors.ligth.primary} />
+                    <Clock size={20} color={colors.light.primary} />
                 </View>
                 <View style={styles.historyInfo}>
                     <Text style={styles.historyName}>{medicine.name}</Text>
                     <Text style={styles.historyGeneric}>{medicine.genericName}</Text>
                     <Text style={styles.historyTime}>{timeAgo}</Text>
                 </View>
-                <ChevronRight size={20} color={colors.ligth.textTertiary} />
+                <ChevronRight size={20} color={colors.light.textTertiary} />
             </TouchableOpacity>
         )
     }
@@ -74,7 +74,7 @@ export default function HistoryScreen() {
 
                 {recentSearches.length === 0 ? (
                     <View style={styles.emptyState}>
-                        <Clock size={64} color={colors.ligth.textSecondary} />
+                        <Clock size={64} color={colors.light.textSecondary} />
                         <Text style={styles.emptyStateText}>Aucune recherche récente</Text>
                         <Text style={styles.emptyStateSubText}>Vos recherches de médicaments apparaitrons ici</Text>
                     </View>
@@ -88,7 +88,7 @@ export default function HistoryScreen() {
                                 style={[styles.clearButton, showConfirm && styles.clearButtonConfirm]} 
                                 onPress={handleClearHistory}
                             >
-                                <Trash2 size={16} color={showConfirm ? '#ffffff' : colors.ligth.error} />
+                                <Trash2 size={16} color={showConfirm ? '#ffffff' : colors.light.error} />
                                 <Text style={[styles.clearButtonText, showConfirm && styles.clearButtonTextConfirm]}>
                                     {showConfirm ? 'Appuyer pour confirmer' : 'Effacer tout'}
                                 </Text>
@@ -112,17 +112,17 @@ export default function HistoryScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.ligth.background
+        backgroundColor: colors.light.background
     },
     header: {
-        backgroundColor: colors.ligth.primary,
+        backgroundColor: colors.light.primary,
         paddingHorizontal: 20,
         paddingBottom: 24
     },
     headerTitle: {
         fontSize: 28,
         fontWeight: '700' as const,
-        color: colors.ligth.surface,
+        color: colors.light.surface,
         marginBottom: 4
     },
     headerSubTitle: {
@@ -138,14 +138,14 @@ const styles = StyleSheet.create({
     emptyStateText: {
         fontSize: 20,
         fontWeight: '600' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
         textAlign: 'center',
         marginTop: 20,
         marginBottom: 8
     },
     emptyStateSubText: {
         fontSize: 15,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         textAlign: 'center',
         lineHeight: 22
     },
@@ -156,13 +156,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 16,
         borderBottomWidth: 1,
-        borderBlockColor: colors.ligth.border,
-        backgroundColor: colors.ligth.surface
+        borderBlockColor: colors.light.border,
+        backgroundColor: colors.light.surface
     },
     countText: {
         fontSize: 14,
         fontWeight: '600' as const,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         textTransform: 'uppercase',
         letterSpacing: .5
     },
@@ -175,12 +175,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(244, 67, 54, 0.1)'
     },
     clearButtonConfirm: {
-        backgroundColor: colors.ligth.error
+        backgroundColor: colors.light.error
     },
     clearButtonText: {
         fontSize: 13,
         fontWeight: '600' as const,
-        color: colors.ligth.error,
+        color: colors.light.error,
         marginLeft: 6
     },
     clearButtonTextConfirm: {
@@ -189,11 +189,11 @@ const styles = StyleSheet.create({
     historyItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: colors.ligth.surface,
+        backgroundColor: colors.light.surface,
         padding: 16,
         borderRadius: 12,
         marginBottom: 8,
-        shadowColor: colors.ligth.shadow,
+        shadowColor: colors.light.shadow,
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.05,
         shadowRadius: 2,
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 8,
-        backgroundColor: `${colors.ligth.primary}15`,
+        backgroundColor: `${colors.light.primary}15`,
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 16,
@@ -214,17 +214,17 @@ const styles = StyleSheet.create({
     historyName: {
         fontSize: 16,
         fontWeight: '600' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
         marginBottom: 2
     },
     historyGeneric: {
         fontSize: 13,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         marginBottom: 4
     },
     historyTime: {
         fontSize: 12,
-        color: colors.ligth.textTertiary,
+        color: colors.light.textTertiary,
     },
     listContent: {
         paddingHorizontal: 16,

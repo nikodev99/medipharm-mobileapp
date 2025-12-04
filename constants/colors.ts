@@ -4,7 +4,7 @@ const secondary = '#ff6b6b'
 const accent = '#ffd93d'
 
 export default {
-    ligth: {
+    light: {
         primary: primary,
         primaryDark: primaryDark,
         secondary: secondary,

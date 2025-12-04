@@ -45,9 +45,9 @@ export default function PharmacyResults() {
             <Stack.Screen options={{
                 title: medicine?.name,
                 headerStyle: {
-                    backgroundColor: colors.ligth.primary
+                    backgroundColor: colors.light.primary
                 },
-                headerTintColor: colors.ligth.surface,
+                headerTintColor: colors.light.surface,
                 headerTitleStyle: {
                     fontWeight: '600' as const
                 }
@@ -90,7 +90,7 @@ export default function PharmacyResults() {
                             </View>
 
                             <View style={styles.pharmacyDetail}>
-                                <MapPin size={16} color={colors.ligth.textSecondary} />
+                                <MapPin size={16} color={colors.light.textSecondary} />
                                 <View style={styles.detailTextContainer}>
                                     <Text style={styles.pharmacyDistrict}>{pharmacy?.district}</Text>
                                     <Text style={styles.pharmacyAddress}>{pharmacy?.address}</Text>
@@ -98,7 +98,7 @@ export default function PharmacyResults() {
                             </View>
 
                             <View style={styles.pharmacyDetail}>
-                                <Clock size={16} color={colors.ligth.textSecondary} />
+                                <Clock size={16} color={colors.light.textSecondary} />
                                 <Text style={styles.pharmacyHour}>{pharmacy?.openingHours}</Text>
                             </View>
 
@@ -117,31 +117,31 @@ export default function PharmacyResults() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.ligth.background
+        backgroundColor: colors.light.background
     },
     errorText: {
         fontSize: 16,
-        color: colors.ligth.error,
+        color: colors.light.error,
         textAlign: 'center',
     },
     medicineInfoCard: {
-        backgroundColor: colors.ligth.surface,
+        backgroundColor: colors.light.surface,
         padding: 20,
         marginBottom: 8
     },
     medicineName: {
         fontSize: 22,
         fontWeight: '700' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
         marginBottom: 4
     },
     medicineGeneric: {
         fontSize: 16,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         marginBottom: 12
     },
     categoryBadge: {
-        backgroundColor: colors.ligth.primary,
+        backgroundColor: colors.light.primary,
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 16,
@@ -151,24 +151,24 @@ const styles = StyleSheet.create({
     categoryText: {
         fontSize: 13,
         fontWeight: '700' as const,
-        color: colors.ligth.surface,
+        color: colors.light.surface,
     },
     medecineDescription: {
         fontSize: 15,
-        color: colors.ligth.text,
+        color: colors.light.text,
         lineHeight: 22,
     },
     resultsHeader: {
         paddingHorizontal: 20,
         paddingVertical: 16,
-        backgroundColor: colors.ligth.surface,
+        backgroundColor: colors.light.surface,
         borderBottomWidth: 1,
-        borderBottomColor: colors.ligth.border
+        borderBottomColor: colors.light.border
     },
     resultsTitle: {
         fontSize: 18,
         fontWeight: '700' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
     },
     emptyState: {
         padding: 40,
@@ -176,22 +176,22 @@ const styles = StyleSheet.create({
     },
     emptyStateText: {
         fontSize: 16,
-        color: colors.ligth.text,
+        color: colors.light.text,
         textAlign: 'center',
         marginBottom: 8
     },
     emptyStateSubText: {
         fontSize: 14,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         textAlign: 'center',
     },
     pharmacyCard: {
-        backgroundColor: colors.ligth.surface,
+        backgroundColor: colors.light.surface,
         padding: 16,
         marginHorizontal: 16,
         marginTop: 12,
         borderRadius: 12,
-        shadowColor: colors.ligth.shadow,
+        shadowColor: colors.light.shadow,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
@@ -207,13 +207,13 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 18,
         fontWeight: '600' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
         marginRight: 8
     },
     pharmacyPrice: {
         fontSize: 18,
         fontWeight: '700' as const,
-        color: colors.ligth.primary,
+        color: colors.light.primary,
     },
     pharmacyDetail: {
         flexDirection: 'row',
@@ -227,22 +227,22 @@ const styles = StyleSheet.create({
     pharmacyDistrict: {
         fontSize: 15,
         fontWeight: '600' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
         marginBottom: 2
     },
     pharmacyAddress: {
         fontSize: 14,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         lineHeight: 20
     },
     pharmacyHour: {
         fontSize: 14,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         marginLeft: 8,
         flex: 1
     },
     callButton: {
-        backgroundColor: colors.ligth.primary,
+        backgroundColor: colors.light.primary,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

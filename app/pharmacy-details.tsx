@@ -135,8 +135,8 @@ export default function PharmacyDetails() {
         <>
             <Stack.Screen options={{
                 title: pharmacy?.name,
-                headerStyle: {backgroundColor: colors.ligth.primary},
-                headerTintColor: colors.ligth.surface,
+                headerStyle: {backgroundColor: colors.light.primary},
+                headerTintColor: colors.light.surface,
                 headerTitleStyle: {fontWeight: '600' as const}
             }} />
             <ScrollView style={styles.container}>
@@ -187,9 +187,9 @@ export default function PharmacyDetails() {
                             <Text style={{marginTop: 12, color: colors.ligth.textSecondary}}>Carte non disponible pour cet appareil</Text>
                         </View>
                     )}*/}
-                    <View style={[styles.maps, {justifyContent: 'center', alignItems: 'center', backgroundColor: colors.ligth.surface}]}>
-                        <MapPin size={48} color={colors.ligth.textSecondary} />
-                        <Text style={{marginTop: 12, color: colors.ligth.textSecondary}}>Carte non disponible pour cet appareil</Text>
+                    <View style={[styles.maps, {justifyContent: 'center', alignItems: 'center', backgroundColor: colors.light.surface}]}>
+                        <MapPin size={48} color={colors.light.textSecondary} />
+                        <Text style={{marginTop: 12, color: colors.light.textSecondary}}>Carte non disponible pour cet appareil</Text>
                     </View>
                 </View>
 
@@ -200,7 +200,7 @@ export default function PharmacyDetails() {
                     </View>
 
                     <View style={styles.infoRow}>
-                        <MapPin size={18} color={colors.ligth.textSecondary} />
+                        <MapPin size={18} color={colors.light.textSecondary} />
                         <View style={styles.infoTextContainer}>
                             <Text style={styles.infoDistrict}>{pharmacy.district}</Text>
                             <Text style={styles.infoAddress}>{pharmacy.address}</Text>
@@ -208,12 +208,12 @@ export default function PharmacyDetails() {
                     </View>
 
                     <View style={styles.infoRow}>
-                        <ClockIcon size={18} color={colors.ligth.textSecondary} />
+                        <ClockIcon size={18} color={colors.light.textSecondary} />
                         <Text style={styles.infoHours}>{pharmacy.openingHours}</Text>
                     </View>
 
                     <TouchableOpacity style={styles.callButton} onPress={() => handleCall(pharmacy?.phone)}>
-                        <PhoneIcon size={18} color={colors.ligth.surface} />
+                        <PhoneIcon size={18} color={colors.light.surface} />
                         <Text style={styles.callButtonText}>Appeler {pharmacy?.phone}</Text>
                     </TouchableOpacity>
                 </View>
@@ -227,7 +227,7 @@ export default function PharmacyDetails() {
                 </View>
 
                 <View style={styles.sectionHeader}>
-                    <FileTextIcon size={18} color={colors.ligth.primary} />
+                    <FileTextIcon size={18} color={colors.light.primary} />
                     <Text style={styles.sectionTitle}>Notice du médicament</Text>
                 </View>
 
@@ -245,9 +245,9 @@ export default function PharmacyDetails() {
                             <TouchableOpacity style={styles.leafletHeader} onPress={() => toggleSection(section.title)}>
                                 <Text style={styles.leafletTitle}>{section.title}</Text>
                                 {isExpanded ? (
-                                    <ChevronUpIcon size={20} color={colors.ligth.text} />
+                                    <ChevronUpIcon size={20} color={colors.light.text} />
                                 ) : (
-                                    <ChevronDownIcon size={20} color={colors.ligth.text} />
+                                    <ChevronDownIcon size={20} color={colors.light.text} />
                                 )}
                             </TouchableOpacity>
                             {isExpanded && (
@@ -260,9 +260,9 @@ export default function PharmacyDetails() {
                                         disabled={isLoadingAi || hasAiExplanation}
                                     >
                                         {isLoadingAi ? (
-                                            <ActivityIndicator size='small' color={colors.ligth.surface} />
+                                            <ActivityIndicator size='small' color={colors.light.surface} />
                                         ) : (
-                                            <Sparkles size={16} color={colors.ligth.surface} />
+                                            <Sparkles size={16} color={colors.light.surface} />
                                         )}
                                         <Text style={styles.aiButtonText}>
                                             {hasAiExplanation ? 'Explication Affiché': 'Expliquer avec l\'IA'}
@@ -272,7 +272,7 @@ export default function PharmacyDetails() {
                                     {hasAiExplanation && (
                                         <View style={styles.aiExplanation}>
                                             <View style={styles.aiExplanationContainer}>
-                                                <Sparkles size={16} color={colors.ligth.primary} />
+                                                <Sparkles size={16} color={colors.light.primary} />
                                                 <Text style={styles.aiExplanationTitle}>Explication Simplifiée</Text>
                                             </View>
                                             <Text style={styles.aiExplanationText}>
@@ -293,19 +293,19 @@ export default function PharmacyDetails() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.ligth.background
+        backgroundColor: colors.light.background
     },
     mapContainer: {
         height: 250,
         width: '100%',
-        backgroundColor: colors.ligth.surface
+        backgroundColor: colors.light.surface
     },
     maps: {
         height: '100%',
         width: '100%'
     },
     pharmacyCardInfo: {
-        backgroundColor: colors.ligth.surface,
+        backgroundColor: colors.light.surface,
         padding: 20,
         marginBottom: 8
     },
@@ -319,13 +319,13 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 22,
         fontWeight: '700' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
         marginRight: 12
     },
     pharmacyPrice: {
         fontSize: 22,
         fontWeight: '700' as const,
-        color: colors.ligth.primary
+        color: colors.light.primary
     },
     infoRow: {
         flexDirection: 'row',
@@ -339,22 +339,22 @@ const styles = StyleSheet.create({
     infoDistrict: {
         fontSize: 16,
         fontWeight: '600' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
         marginBottom: 2
     },
     infoAddress: {
         fontSize: 15,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         lineHeight: 20
     },
     infoHours: {
         fontSize: 15,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         marginLeft: 10,
         flex: 1
     },
     callButton: {
-        backgroundColor: colors.ligth.primary,
+        backgroundColor: colors.light.primary,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -369,23 +369,23 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     medicineInfoCard: {
-        backgroundColor: colors.ligth.surface,
+        backgroundColor: colors.light.surface,
         padding: 20,
         marginBottom: 8,
     },
     medicineName: {
         fontSize: 20,
         fontWeight: '700' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
         marginBottom: 4
     },
     medicineGenericName: {
         fontSize: 15,
-        color: colors.ligth.textSecondary,
+        color: colors.light.textSecondary,
         marginBottom: 10
     },
     categoryBadge: {
-        backgroundColor: colors.ligth.primary,
+        backgroundColor: colors.light.primary,
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 16,
@@ -394,22 +394,22 @@ const styles = StyleSheet.create({
     categoryText: {
         fontSize: 13,
         fontWeight: '600' as const,
-        color: colors.ligth.surface,
+        color: colors.light.surface,
     },
     sectionHeader: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 20,
         paddingVertical: 16,
-        backgroundColor: colors.ligth.surface,
+        backgroundColor: colors.light.surface,
         borderBottomWidth: 1,
-        borderBottomColor: colors.ligth.border
+        borderBottomColor: colors.light.border
 
     },
     sectionTitle: {
         fontSize: 18,
         fontWeight: '600' as const,
-        color: colors.ligth.text,
+        color: colors.light.text,
         marginLeft: 8
     },
     premiumBadge: {
@@ -432,13 +432,13 @@ const styles = StyleSheet.create({
         marginLeft: 6
     },
     leafletSection: {
-        backgroundColor: colors.ligth.surface,
+        backgroundColor: colors.light.surface,
         marginHorizontal: 16,
         marginTop: 12,
         marginBottom: 16,
         borderRadius: 12,
         overflow: 'hidden',
-        shadowColor: colors.ligth.shadow,
+        shadowColor: colors.light.shadow,
         shadowOffset: {width: 0, height: 1},
         shadowOpacity: 0.8,
         shadowRadius: 3,
@@ -454,16 +454,16 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 16,
         fontWeight: '600' as const,
-        color: colors.ligth.text
+        color: colors.light.text
     },
     leafletContent: {
         paddingHorizontal: 16,
         paddingBottom: 12,
         fontSize: 15,
-        color: colors.ligth.text,
+        color: colors.light.text,
     },
     aiButton: {
-        backgroundColor: colors.ligth.primary,
+        backgroundColor: colors.light.primary,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -473,10 +473,10 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     aiActiveButton: {
-        backgroundColor: colors.ligth.textSecondary,
+        backgroundColor: colors.light.textSecondary,
     },
     aiButtonText: {
-        color: colors.ligth.surface,
+        color: colors.light.surface,
         fontSize: 14,
         fontWeight: '600' as const,
         marginLeft: 8
@@ -488,7 +488,7 @@ const styles = StyleSheet.create({
         padding: 16,
         borderRadius: 8,
         borderLeftWidth: 3,
-        borderLeftColor: colors.ligth.primary
+        borderLeftColor: colors.light.primary
     },
     aiExplanationContainer: {
         flexDirection: 'row',
@@ -498,17 +498,17 @@ const styles = StyleSheet.create({
     aiExplanationTitle: {
         fontSize: 15,
         fontWeight: '600' as const,
-        color: colors.ligth.primary,
+        color: colors.light.primary,
         marginLeft: 6
     },
     aiExplanationText: {
         fontSize: 15,
-        color: colors.ligth.text,
+        color: colors.light.text,
         lineHeight: 22
     },
     errorText: {
         fontSize: 16,
-        color: colors.ligth.error,
+        color: colors.light.error,
         textAlign: 'center',
         padding: 20
     }

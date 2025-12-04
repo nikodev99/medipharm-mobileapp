@@ -43,7 +43,7 @@ export default function HomePage() {
 
   const borderColor = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [colors.ligth.border, colors.ligth.primary]
+    outputRange: [colors.light.border, colors.light.primary]
   })
 
   const clearSearch = () => {
@@ -67,18 +67,18 @@ export default function HomePage() {
       <Text style={styles.medecinText}>{item.name}</Text>
         <Text style={styles.medecinGeneric}>{item.genericName}</Text>
       </View>
-      <ChevronRight size={20} color={colors.ligth.textTertiary} />
+      <ChevronRight size={20} color={colors.light.textTertiary} />
     </TouchableOpacity>
   )
 
   const renderRecentItem = ({ item }: { item: Medicine }) => (
     <TouchableOpacity style={styles.recentItem} onPress={() => handleMedecineSelect(item)}>
-      <Clock size={18} color={colors.ligth.textSecondary} />
+      <Clock size={18} color={colors.light.textSecondary} />
       <View style={styles.recentInfo}>
         <Text style={styles.recentName}>{item.name}</Text>
         <Text style={styles.recentGeneric}>{item.genericName}</Text>
       </View>
-      <ChevronRight size={20} color={colors.ligth.textTertiary} />
+      <ChevronRight size={20} color={colors.light.textTertiary} />
     </TouchableOpacity>
   )
 
@@ -93,12 +93,12 @@ export default function HomePage() {
         </View>
 
         <Animated.View style={[styles.searchContainer, {borderColor: borderColor}]}>
-          <Search size={20} color={colors.ligth.textSecondary} />
+          <Search size={20} color={colors.light.textSecondary} />
           <TextInput 
             ref={searchInputRef}
             style={styles.searchInput} 
             placeholder="Nom du médicament..."
-            placeholderTextColor={colors.ligth.textTertiary}
+            placeholderTextColor={colors.light.textTertiary}
             value={searchQuery}
             onChangeText={setSearchQuery}
             onFocus={() => setIsFocused(true)}
@@ -109,7 +109,7 @@ export default function HomePage() {
 
           {searchQuery.length > 0 && (
             <TouchableOpacity onPress={clearSearch} style={styles.clearButton}>
-              <X size={18} color={colors.ligth.textSecondary} />
+              <X size={18} color={colors.light.textSecondary} />
             </TouchableOpacity>
           )}
         </Animated.View>
@@ -150,7 +150,7 @@ export default function HomePage() {
             </>
           ): (
             <View style={styles.emptyState}>
-              <Search size={48} color={colors.ligth.textTertiary} />
+              <Search size={48} color={colors.light.textTertiary} />
               <Text style={styles.emptyStateText}>Commencer à rechercher</Text>
               <Text style={styles.emptyStateSubtitle}>Entrer le nom d&apos;un médicament pour trouver les pharmacies proches où il est disponible</Text>
             </View>
@@ -165,10 +165,10 @@ export default function HomePage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.ligth.background,
+    backgroundColor: colors.light.background,
   },
   header: {
-    backgroundColor: colors.ligth.primary,
+    backgroundColor: colors.light.primary,
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
     fontWeight: '700' as const,
-    color: colors.ligth.surface,
+    color: colors.light.surface,
     marginBottom: 6
   },
   headerSubtitle: {
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.ligth.surface,
+    backgroundColor: colors.light.surface,
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 16,
-    color: colors.ligth.text,
+    color: colors.light.text,
     marginLeft: 12,
     paddingVertical: 0
   },
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 14,
     fontWeight: '600' as const,
-    color: colors.ligth.textSecondary,
+    color: colors.light.textSecondary,
     transform: 'uppercase',
     letterSpacing: .5,
     paddingHorizontal: 20,
@@ -225,11 +225,11 @@ const styles = StyleSheet.create({
   medecinItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.ligth.surface,
+    backgroundColor: colors.light.surface,
     padding: 16,
     borderRadius: 12,
     marginBottom: 8,
-    shadowColor: colors.ligth.shadow,
+    shadowColor: colors.light.shadow,
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.05,
     shadowRadius: 2,
@@ -241,12 +241,12 @@ const styles = StyleSheet.create({
   medecinText: {
     fontSize: 16,
     fontWeight: '500' as const,
-    color: colors.ligth.text,
+    color: colors.light.text,
     marginBottom: 4
   },
   medecinGeneric: {
     fontSize: 14,
-    color: colors.ligth.textSecondary
+    color: colors.light.textSecondary
   },
   recentInfo: {
     flex: 1,
@@ -255,17 +255,17 @@ const styles = StyleSheet.create({
   recentName: {
     fontSize: 16,
     fontWeight: '500' as const,
-    color: colors.ligth.text,
+    color: colors.light.text,
     marginBottom: 2
   },
   recentGeneric: {
     fontSize: 13,
-    color: colors.ligth.textSecondary
+    color: colors.light.textSecondary
   },
   recentItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.ligth.surface,
+    backgroundColor: colors.light.surface,
     padding: 12,
     borderRadius: 12,
     marginBottom: 8
@@ -279,14 +279,14 @@ const styles = StyleSheet.create({
   emptyStateText: {
     fontSize: 18,
     fontWeight: '600' as const,
-    color: colors.ligth.text,
+    color: colors.light.text,
     textAlign: 'center',
     marginTop: 16,
     marginBottom: 8
   },
   emptyStateSubtitle: {
     fontSize: 15,
-    color: colors.ligth.textSecondary,
+    color: colors.light.textSecondary,
     textAlign: 'center',
     lineHeight: 22
   },

@@ -6,12 +6,12 @@ import colors from "@/constants/colors";
 export default function TabLayout() {
     return(
         <Tabs screenOptions={{
-            tabBarActiveTintColor: colors.ligth.primary,
-            tabBarInactiveTintColor: colors.ligth.tabIconDefault,
+            tabBarActiveTintColor: colors.light.primary,
+            tabBarInactiveTintColor: colors.light.tabIconDefault,
             headerShown: false,
             tabBarStyle: {
-                backgroundColor: colors.ligth.surface,
-                borderTopColor: colors.ligth.border,
+                backgroundColor: colors.light.surface,
+                borderTopColor: colors.light.border,
                 borderTopWidth: 1
             },
             tabBarLabelStyle: {
