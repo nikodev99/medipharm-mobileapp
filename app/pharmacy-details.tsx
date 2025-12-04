@@ -16,15 +16,15 @@ import {
     Sparkles
 } from "lucide-react-native";
 import {handleCall} from "@/helper/helper";
-import {} from '@ai-sdk/react'
-import {createGateway, generateText} from "ai";
+import {generateText} from "ai";
+import {createOpenAI} from "@ai-sdk/openai";
 
 interface LeafletSection {
     title: string
     content: string
 }
 
-const gateway = createGateway({
+const gateway = createOpenAI({
     apiKey: process.env.AI_GATEWAY_API_KEY,
 })
 
@@ -90,14 +90,18 @@ export default function PharmacyDetails() {
             compréhensibles pour un patient, sans jargon médical complexe. Soi clair, garde un ton proféssionnel mais accessible.`
 
             const {text} = await generateText({
-                model: gateway('openai/gpt-4-turbo'),
-                prompt
+                model: gateway('gpt-4-turbo'),
+                prompt: prompt
             })
             console.log('TEXT: ', text)
             return {sectionTitle: section.title, explanation: text}
         },
         onSuccess: (data) => {
+            console.log('EXPLANATION: ', data)
             setAiExplanation(prev => new Map(prev).set(data.sectionTitle, data.explanation))
+        },
+        onError: (error) => {
+            console.log('ERROR: ', error)
         }
     })
 
@@ -114,7 +118,7 @@ export default function PharmacyDetails() {
     }
 
     const handleExplainSection = (section: LeafletSection) => {
-        if (aiExplanation.has(section.title)) {
+        if (!aiExplanation.has(section.title)) {
             explainWithAiMutation.mutate(section)
         }
     }
@@ -431,6 +435,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.ligth.surface,
         marginHorizontal: 16,
         marginTop: 12,
+        marginBottom: 16,
         borderRadius: 12,
         overflow: 'hidden',
         shadowColor: colors.ligth.shadow,
