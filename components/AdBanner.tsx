@@ -2,10 +2,12 @@ import {useSubscription} from "@/context/SubscriptionContext";
 import {useEffect} from "react";
 import {AdMobConfig} from "@/constants/admod";
 import {Platform, Text, View, StyleSheet} from "react-native";
-import colors from "@/constants/colors";
+import {useTheme} from "@/context/ThemeContext";
 
 export default function AdBanner() {
     const {isPremium} = useSubscription()
+    const {color} = useTheme()
+    const styles = createStyles(color)
 
     useEffect(() => {
         if (!isPremium) {
@@ -44,16 +46,16 @@ export default function AdBanner() {
     )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (color: Record<string, string>) => StyleSheet.create({
     container: {
-        backgroundColor: colors.light.surface,
+        backgroundColor: color.surface,
         borderTopWidth: 1,
-        borderTopColor: colors.light.border,
+        borderTopColor: color.border,
         paddingHorizontal: 16,
         paddingVertical: 10,
         flexDirection: 'row',
         alignItems: 'center',
-        shadowColor: colors.light.shadow,
+        shadowColor: color.shadow,
         shadowOffset: { width: 0, height: -2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
@@ -70,19 +72,19 @@ const styles = StyleSheet.create({
     adLabel: {
         fontSize: 10,
         fontWeight: '700' as const,
-        color: colors.light.textTertiary,
+        color: color.textTertiary,
         letterSpacing: .5
     },
     adText: {
         fontSize: 13,
         fontWeight: '500' as const,
-        color: colors.light.text,
+        color: color.text,
         lineHeight: 18
     },
     adNote: {
         fontSize: 11,
         fontWeight: '400' as const,
-        color: colors.light.textSecondary,
+        color: color.textSecondary,
         lineHeight: 16,
         marginTop: 4,
         fontStyle: 'italic' as const

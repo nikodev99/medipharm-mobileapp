@@ -1,20 +1,22 @@
 import { Tabs } from "expo-router";
 import {Clock, Search, Settings, User} from "lucide-react-native"
 
-import colors from "@/constants/colors";
 import {StyleSheet, View} from "react-native";
 import AdBanner from "@/components/AdBanner";
+import {useTheme} from "@/context/ThemeContext";
 
 export default function TabLayout() {
+    const {color} = useTheme()
+    
     return(
         <View style={styles.container}>
             <Tabs screenOptions={{
-                tabBarActiveTintColor: colors.light.primary,
-                tabBarInactiveTintColor: colors.light.tabIconDefault,
+                tabBarActiveTintColor: color.primary,
+                tabBarInactiveTintColor: color.tabIconDefault,
                 headerShown: false,
                 tabBarStyle: {
-                    backgroundColor: colors.light.surface,
-                    borderTopColor: colors.light.border,
+                    backgroundColor: color.surface,
+                    borderTopColor: color.border,
                     borderTopWidth: 1
                 },
                 tabBarLabelStyle: {

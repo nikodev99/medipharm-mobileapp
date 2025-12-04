@@ -5,7 +5,6 @@ import {useMemo, useState} from "react";
 import {pharmacies, pharmacyStocks} from "@/api/pharmacies";
 import {medicines} from "@/api/medecine";
 import {useMutation} from "@tanstack/react-query";
-import colors from "@/constants/colors";
 import {
     ChevronDownIcon,
     ChevronUpIcon,
@@ -18,6 +17,7 @@ import {
 import {handleCall} from "@/helper/helper";
 import {generateText} from "ai";
 import {createOpenAI} from "@ai-sdk/openai";
+import {useTheme} from "@/context/ThemeContext";
 
 interface LeafletSection {
     title: string
@@ -36,6 +36,8 @@ export default function PharmacyDetails() {
 
     const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set())
     const [aiExplanation, setAiExplanation] = useState<Map<string, string>>(new Map())
+    const {color} = useTheme()
+    const styles = createStyles(color)
 
     const pharmacy = useMemo(() => pharmacies.find(p => p.id === pharmacyId), [pharmacyId])
     const medicine = useMemo(() => medicines.find(m => m.id === medicineId), [medicineId])
@@ -135,8 +137,8 @@ export default function PharmacyDetails() {
         <>
             <Stack.Screen options={{
                 title: pharmacy?.name,
-                headerStyle: {backgroundColor: colors.light.primary},
-                headerTintColor: colors.light.surface,
+                headerStyle: {backgroundColor: color.primary},
+                headerTintColor: color.surface,
                 headerTitleStyle: {fontWeight: '600' as const}
             }} />
             <ScrollView style={styles.container}>
@@ -187,9 +189,9 @@ export default function PharmacyDetails() {
                             <Text style={{marginTop: 12, color: colors.ligth.textSecondary}}>Carte non disponible pour cet appareil</Text>
                         </View>
                     )}*/}
-                    <View style={[styles.maps, {justifyContent: 'center', alignItems: 'center', backgroundColor: colors.light.surface}]}>
-                        <MapPin size={48} color={colors.light.textSecondary} />
-                        <Text style={{marginTop: 12, color: colors.light.textSecondary}}>Carte non disponible pour cet appareil</Text>
+                    <View style={[styles.maps, {justifyContent: 'center', alignItems: 'center', backgroundColor: color.surface}]}>
+                        <MapPin size={48} color={color.textSecondary} />
+                        <Text style={{marginTop: 12, color: color.textSecondary}}>Carte non disponible pour cet appareil</Text>
                     </View>
                 </View>
 
@@ -200,7 +202,7 @@ export default function PharmacyDetails() {
                     </View>
 
                     <View style={styles.infoRow}>
-                        <MapPin size={18} color={colors.light.textSecondary} />
+                        <MapPin size={18} color={color.textSecondary} />
                         <View style={styles.infoTextContainer}>
                             <Text style={styles.infoDistrict}>{pharmacy.district}</Text>
                             <Text style={styles.infoAddress}>{pharmacy.address}</Text>
@@ -208,12 +210,12 @@ export default function PharmacyDetails() {
                     </View>
 
                     <View style={styles.infoRow}>
-                        <ClockIcon size={18} color={colors.light.textSecondary} />
+                        <ClockIcon size={18} color={color.textSecondary} />
                         <Text style={styles.infoHours}>{pharmacy.openingHours}</Text>
                     </View>
 
                     <TouchableOpacity style={styles.callButton} onPress={() => handleCall(pharmacy?.phone)}>
-                        <PhoneIcon size={18} color={colors.light.surface} />
+                        <PhoneIcon size={18} color={color.surface} />
                         <Text style={styles.callButtonText}>Appeler {pharmacy?.phone}</Text>
                     </TouchableOpacity>
                 </View>
@@ -227,7 +229,7 @@ export default function PharmacyDetails() {
                 </View>
 
                 <View style={styles.sectionHeader}>
-                    <FileTextIcon size={18} color={colors.light.primary} />
+                    <FileTextIcon size={18} color={color.primary} />
                     <Text style={styles.sectionTitle}>Notice du médicament</Text>
                 </View>
 
@@ -245,9 +247,9 @@ export default function PharmacyDetails() {
                             <TouchableOpacity style={styles.leafletHeader} onPress={() => toggleSection(section.title)}>
                                 <Text style={styles.leafletTitle}>{section.title}</Text>
                                 {isExpanded ? (
-                                    <ChevronUpIcon size={20} color={colors.light.text} />
+                                    <ChevronUpIcon size={20} color={color.text} />
                                 ) : (
-                                    <ChevronDownIcon size={20} color={colors.light.text} />
+                                    <ChevronDownIcon size={20} color={color.text} />
                                 )}
                             </TouchableOpacity>
                             {isExpanded && (
@@ -260,9 +262,9 @@ export default function PharmacyDetails() {
                                         disabled={isLoadingAi || hasAiExplanation}
                                     >
                                         {isLoadingAi ? (
-                                            <ActivityIndicator size='small' color={colors.light.surface} />
+                                            <ActivityIndicator size='small' color={color.surface} />
                                         ) : (
-                                            <Sparkles size={16} color={colors.light.surface} />
+                                            <Sparkles size={16} color={color.surface} />
                                         )}
                                         <Text style={styles.aiButtonText}>
                                             {hasAiExplanation ? 'Explication Affiché': 'Expliquer avec l\'IA'}
@@ -272,7 +274,7 @@ export default function PharmacyDetails() {
                                     {hasAiExplanation && (
                                         <View style={styles.aiExplanation}>
                                             <View style={styles.aiExplanationContainer}>
-                                                <Sparkles size={16} color={colors.light.primary} />
+                                                <Sparkles size={16} color={color.primary} />
                                                 <Text style={styles.aiExplanationTitle}>Explication Simplifiée</Text>
                                             </View>
                                             <Text style={styles.aiExplanationText}>
@@ -290,22 +292,22 @@ export default function PharmacyDetails() {
     )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (color: Record<string, string>) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.light.background
+        backgroundColor: color.background
     },
     mapContainer: {
         height: 250,
         width: '100%',
-        backgroundColor: colors.light.surface
+        backgroundColor: color.surface
     },
     maps: {
         height: '100%',
         width: '100%'
     },
     pharmacyCardInfo: {
-        backgroundColor: colors.light.surface,
+        backgroundColor: color.surface,
         padding: 20,
         marginBottom: 8
     },
@@ -319,13 +321,13 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 22,
         fontWeight: '700' as const,
-        color: colors.light.text,
+        color: color.text,
         marginRight: 12
     },
     pharmacyPrice: {
         fontSize: 22,
         fontWeight: '700' as const,
-        color: colors.light.primary
+        color: color.primary
     },
     infoRow: {
         flexDirection: 'row',
@@ -339,22 +341,22 @@ const styles = StyleSheet.create({
     infoDistrict: {
         fontSize: 16,
         fontWeight: '600' as const,
-        color: colors.light.text,
+        color: color.text,
         marginBottom: 2
     },
     infoAddress: {
         fontSize: 15,
-        color: colors.light.textSecondary,
+        color: color.textSecondary,
         lineHeight: 20
     },
     infoHours: {
         fontSize: 15,
-        color: colors.light.textSecondary,
+        color: color.textSecondary,
         marginLeft: 10,
         flex: 1
     },
     callButton: {
-        backgroundColor: colors.light.primary,
+        backgroundColor: color.primary,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -369,23 +371,23 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     medicineInfoCard: {
-        backgroundColor: colors.light.surface,
+        backgroundColor: color.surface,
         padding: 20,
         marginBottom: 8,
     },
     medicineName: {
         fontSize: 20,
         fontWeight: '700' as const,
-        color: colors.light.text,
+        color: color.text,
         marginBottom: 4
     },
     medicineGenericName: {
         fontSize: 15,
-        color: colors.light.textSecondary,
+        color: color.textSecondary,
         marginBottom: 10
     },
     categoryBadge: {
-        backgroundColor: colors.light.primary,
+        backgroundColor: color.primary,
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 16,
@@ -394,22 +396,22 @@ const styles = StyleSheet.create({
     categoryText: {
         fontSize: 13,
         fontWeight: '600' as const,
-        color: colors.light.surface,
+        color: color.surface,
     },
     sectionHeader: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 20,
         paddingVertical: 16,
-        backgroundColor: colors.light.surface,
+        backgroundColor: color.surface,
         borderBottomWidth: 1,
-        borderBottomColor: colors.light.border
+        borderBottomColor: color.border
 
     },
     sectionTitle: {
         fontSize: 18,
         fontWeight: '600' as const,
-        color: colors.light.text,
+        color: color.text,
         marginLeft: 8
     },
     premiumBadge: {
@@ -432,13 +434,13 @@ const styles = StyleSheet.create({
         marginLeft: 6
     },
     leafletSection: {
-        backgroundColor: colors.light.surface,
+        backgroundColor: color.surface,
         marginHorizontal: 16,
         marginTop: 12,
         marginBottom: 16,
         borderRadius: 12,
         overflow: 'hidden',
-        shadowColor: colors.light.shadow,
+        shadowColor: color.shadow,
         shadowOffset: {width: 0, height: 1},
         shadowOpacity: 0.8,
         shadowRadius: 3,
@@ -454,16 +456,16 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 16,
         fontWeight: '600' as const,
-        color: colors.light.text
+        color: color.text
     },
     leafletContent: {
         paddingHorizontal: 16,
         paddingBottom: 12,
         fontSize: 15,
-        color: colors.light.text,
+        color: color.text,
     },
     aiButton: {
-        backgroundColor: colors.light.primary,
+        backgroundColor: color.primary,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -473,10 +475,10 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     aiActiveButton: {
-        backgroundColor: colors.light.textSecondary,
+        backgroundColor: color.textSecondary,
     },
     aiButtonText: {
-        color: colors.light.surface,
+        color: color.surface,
         fontSize: 14,
         fontWeight: '600' as const,
         marginLeft: 8
@@ -488,7 +490,7 @@ const styles = StyleSheet.create({
         padding: 16,
         borderRadius: 8,
         borderLeftWidth: 3,
-        borderLeftColor: colors.light.primary
+        borderLeftColor: color.primary
     },
     aiExplanationContainer: {
         flexDirection: 'row',
@@ -498,17 +500,17 @@ const styles = StyleSheet.create({
     aiExplanationTitle: {
         fontSize: 15,
         fontWeight: '600' as const,
-        color: colors.light.primary,
+        color: color.primary,
         marginLeft: 6
     },
     aiExplanationText: {
         fontSize: 15,
-        color: colors.light.text,
+        color: color.text,
         lineHeight: 22
     },
     errorText: {
         fontSize: 16,
-        color: colors.light.error,
+        color: color.error,
         textAlign: 'center',
         padding: 20
     }

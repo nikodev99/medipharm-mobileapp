@@ -3,13 +3,15 @@ import {Stack, useLocalSearchParams, useRouter} from "expo-router";
 import {useMemo} from "react";
 import {medicines} from "@/api/medecine";
 import {pharmacies, pharmacyStocks} from "@/api/pharmacies";
-import colors from "@/constants/colors";
 import {Clock, MapPin, Phone} from "lucide-react-native";
 import {handleCall} from "@/helper/helper";
+import {useTheme} from "@/context/ThemeContext";
 
 export default function PharmacyResults() {
     const router = useRouter()
     const { medicineId } = useLocalSearchParams<{ medicineId: string }>()
+    const { color } = useTheme()
+    const styles = createStyles(color)
 
     const medicine = useMemo(() => medicines.find(m => m.id === medicineId), [medicineId])
     const availablePharmacies = useMemo(() => {
@@ -45,9 +47,9 @@ export default function PharmacyResults() {
             <Stack.Screen options={{
                 title: medicine?.name,
                 headerStyle: {
-                    backgroundColor: colors.light.primary
+                    backgroundColor: color.primary
                 },
-                headerTintColor: colors.light.surface,
+                headerTintColor: color.surface,
                 headerTitleStyle: {
                     fontWeight: '600' as const
                 }
@@ -90,7 +92,7 @@ export default function PharmacyResults() {
                             </View>
 
                             <View style={styles.pharmacyDetail}>
-                                <MapPin size={16} color={colors.light.textSecondary} />
+                                <MapPin size={16} color={color.textSecondary} />
                                 <View style={styles.detailTextContainer}>
                                     <Text style={styles.pharmacyDistrict}>{pharmacy?.district}</Text>
                                     <Text style={styles.pharmacyAddress}>{pharmacy?.address}</Text>
@@ -98,7 +100,7 @@ export default function PharmacyResults() {
                             </View>
 
                             <View style={styles.pharmacyDetail}>
-                                <Clock size={16} color={colors.light.textSecondary} />
+                                <Clock size={16} color={color.textSecondary} />
                                 <Text style={styles.pharmacyHour}>{pharmacy?.openingHours}</Text>
                             </View>
 
@@ -114,34 +116,34 @@ export default function PharmacyResults() {
     )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (color: Record<string, string>) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.light.background
+        backgroundColor: color.background
     },
     errorText: {
         fontSize: 16,
-        color: colors.light.error,
+        color: color.error,
         textAlign: 'center',
     },
     medicineInfoCard: {
-        backgroundColor: colors.light.surface,
+        backgroundColor: color.surface,
         padding: 20,
         marginBottom: 8
     },
     medicineName: {
         fontSize: 22,
         fontWeight: '700' as const,
-        color: colors.light.text,
+        color: color.text,
         marginBottom: 4
     },
     medicineGeneric: {
         fontSize: 16,
-        color: colors.light.textSecondary,
+        color: color.textSecondary,
         marginBottom: 12
     },
     categoryBadge: {
-        backgroundColor: colors.light.primary,
+        backgroundColor: color.primary,
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 16,
@@ -151,24 +153,24 @@ const styles = StyleSheet.create({
     categoryText: {
         fontSize: 13,
         fontWeight: '700' as const,
-        color: colors.light.surface,
+        color: color.surface,
     },
     medecineDescription: {
         fontSize: 15,
-        color: colors.light.text,
+        color: color.text,
         lineHeight: 22,
     },
     resultsHeader: {
         paddingHorizontal: 20,
         paddingVertical: 16,
-        backgroundColor: colors.light.surface,
+        backgroundColor: color.surface,
         borderBottomWidth: 1,
-        borderBottomColor: colors.light.border
+        borderBottomColor: color.border
     },
     resultsTitle: {
         fontSize: 18,
         fontWeight: '700' as const,
-        color: colors.light.text,
+        color: color.text,
     },
     emptyState: {
         padding: 40,
@@ -176,22 +178,22 @@ const styles = StyleSheet.create({
     },
     emptyStateText: {
         fontSize: 16,
-        color: colors.light.text,
+        color: color.text,
         textAlign: 'center',
         marginBottom: 8
     },
     emptyStateSubText: {
         fontSize: 14,
-        color: colors.light.textSecondary,
+        color: color.textSecondary,
         textAlign: 'center',
     },
     pharmacyCard: {
-        backgroundColor: colors.light.surface,
+        backgroundColor: color.surface,
         padding: 16,
         marginHorizontal: 16,
         marginTop: 12,
         borderRadius: 12,
-        shadowColor: colors.light.shadow,
+        shadowColor: color.shadow,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
@@ -207,13 +209,13 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 18,
         fontWeight: '600' as const,
-        color: colors.light.text,
+        color: color.text,
         marginRight: 8
     },
     pharmacyPrice: {
         fontSize: 18,
         fontWeight: '700' as const,
-        color: colors.light.primary,
+        color: color.primary,
     },
     pharmacyDetail: {
         flexDirection: 'row',
@@ -227,22 +229,22 @@ const styles = StyleSheet.create({
     pharmacyDistrict: {
         fontSize: 15,
         fontWeight: '600' as const,
-        color: colors.light.text,
+        color: color.text,
         marginBottom: 2
     },
     pharmacyAddress: {
         fontSize: 14,
-        color: colors.light.textSecondary,
+        color: color.textSecondary,
         lineHeight: 20
     },
     pharmacyHour: {
         fontSize: 14,
-        color: colors.light.textSecondary,
+        color: color.textSecondary,
         marginLeft: 8,
         flex: 1
     },
     callButton: {
-        backgroundColor: colors.light.primary,
+        backgroundColor: color.primary,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

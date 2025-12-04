@@ -3,9 +3,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RecentSearchesContext } from "@/context/RecentSearchesContext";
-import {useEffect} from "react";
-import {ThemeContext, useTheme} from "@/context/ThemeContext";
-import {SubscriptionContext} from "@/context/SubscriptionContext";
+import { useEffect } from "react";
+import { ThemeContext, useTheme } from "@/context/ThemeContext";
+import { SubscriptionContext } from "@/context/SubscriptionContext";
 
 SplashScreen.preventAutoHideAsync();
 

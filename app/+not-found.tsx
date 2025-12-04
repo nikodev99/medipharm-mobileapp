@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
 import {Link, Stack} from "expo-router";
-import colors from "@/constants/colors";
+import {useTheme} from "@/context/ThemeContext";
 
 export default function NotFound() {
+    const {color} = useTheme()
+    const styles = createStyles(color)
     return(
         <>
             <Stack.Screen options={{ title: 'Page Introuvable' }}/>
@@ -16,18 +18,18 @@ export default function NotFound() {
     )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (color: Record<string, string>) => StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: colors.light.background
+        backgroundColor: color.background
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold' as const,
-        color: colors.light.text,
+        color: color.text,
     },
     link: {
         marginTop: 15,
@@ -35,6 +37,6 @@ const styles = StyleSheet.create({
     },
     linkText: {
         fontSize: 14,
-        color: colors.light.primary,
+        color: color.primary,
     }
 })

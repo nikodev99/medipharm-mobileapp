@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TextInput, Animated, TouchableOpacity, FlatList
 import { useRecentSearches } from "@/context/RecentSearchesContext";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useEffect, useMemo, useRef, useState } from "react";
-import colors from "@/constants/colors";
 import { ChevronRight, Clock, Search, X } from "lucide-react-native";
 import { Medicine, medicines } from "@/api/medecine";
+import {useTheme} from "@/context/ThemeContext";
 
 export default function HomePage() {
   const router = useRouter();
@@ -15,6 +15,8 @@ export default function HomePage() {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const searchInputRef = useRef<TextInput>(null);
   const animatedValue = useRef(new Animated.Value(0)).current;
+  const {color} = useTheme()
+  const styles = createStyles(color);
 
   const filteredMedications = useMemo(() => {
     if (!searchQuery.trim()) return [];
@@ -43,7 +45,7 @@ export default function HomePage() {
 
   const borderColor = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [colors.light.border, colors.light.primary]
+    outputRange: [color.border, color.primary]
   })
 
   const clearSearch = () => {
@@ -67,18 +69,18 @@ export default function HomePage() {
       <Text style={styles.medecinText}>{item.name}</Text>
         <Text style={styles.medecinGeneric}>{item.genericName}</Text>
       </View>
-      <ChevronRight size={20} color={colors.light.textTertiary} />
+      <ChevronRight size={20} color={color.textTertiary} />
     </TouchableOpacity>
   )
 
   const renderRecentItem = ({ item }: { item: Medicine }) => (
     <TouchableOpacity style={styles.recentItem} onPress={() => handleMedecineSelect(item)}>
-      <Clock size={18} color={colors.light.textSecondary} />
+      <Clock size={18} color={color.textSecondary} />
       <View style={styles.recentInfo}>
         <Text style={styles.recentName}>{item.name}</Text>
         <Text style={styles.recentGeneric}>{item.genericName}</Text>
       </View>
-      <ChevronRight size={20} color={colors.light.textTertiary} />
+      <ChevronRight size={20} color={color.textTertiary} />
     </TouchableOpacity>
   )
 
@@ -93,12 +95,12 @@ export default function HomePage() {
         </View>
 
         <Animated.View style={[styles.searchContainer, {borderColor: borderColor}]}>
-          <Search size={20} color={colors.light.textSecondary} />
+          <Search size={20} color={color.textSecondary} />
           <TextInput 
             ref={searchInputRef}
             style={styles.searchInput} 
             placeholder="Nom du médicament..."
-            placeholderTextColor={colors.light.textTertiary}
+            placeholderTextColor={color.textTertiary}
             value={searchQuery}
             onChangeText={setSearchQuery}
             onFocus={() => setIsFocused(true)}
@@ -109,7 +111,7 @@ export default function HomePage() {
 
           {searchQuery.length > 0 && (
             <TouchableOpacity onPress={clearSearch} style={styles.clearButton}>
-              <X size={18} color={colors.light.textSecondary} />
+              <X size={18} color={color.textSecondary} />
             </TouchableOpacity>
           )}
         </Animated.View>
@@ -150,7 +152,7 @@ export default function HomePage() {
             </>
           ): (
             <View style={styles.emptyState}>
-              <Search size={48} color={colors.light.textTertiary} />
+              <Search size={48} color={color.textTertiary} />
               <Text style={styles.emptyStateText}>Commencer à rechercher</Text>
               <Text style={styles.emptyStateSubtitle}>Entrer le nom d&apos;un médicament pour trouver les pharmacies proches où il est disponible</Text>
             </View>
@@ -162,13 +164,13 @@ export default function HomePage() {
   )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (color: Record<string, string>) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.light.background,
+    backgroundColor: color.background,
   },
   header: {
-    backgroundColor: colors.light.primary,
+    backgroundColor: color.primary,
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
     fontWeight: '700' as const,
-    color: colors.light.surface,
+    color: color.surface,
     marginBottom: 6
   },
   headerSubtitle: {
@@ -189,7 +191,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.light.surface,
+    backgroundColor: color.surface,
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -198,7 +200,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 16,
-    color: colors.light.text,
+    color: color.text,
     marginLeft: 12,
     paddingVertical: 0
   },
@@ -212,7 +214,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 14,
     fontWeight: '600' as const,
-    color: colors.light.textSecondary,
+    color: color.textSecondary,
     transform: 'uppercase',
     letterSpacing: .5,
     paddingHorizontal: 20,
@@ -225,11 +227,11 @@ const styles = StyleSheet.create({
   medecinItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.light.surface,
+    backgroundColor: color.surface,
     padding: 16,
     borderRadius: 12,
     marginBottom: 8,
-    shadowColor: colors.light.shadow,
+    shadowColor: color.shadow,
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.05,
     shadowRadius: 2,
@@ -241,12 +243,12 @@ const styles = StyleSheet.create({
   medecinText: {
     fontSize: 16,
     fontWeight: '500' as const,
-    color: colors.light.text,
+    color: color.text,
     marginBottom: 4
   },
   medecinGeneric: {
     fontSize: 14,
-    color: colors.light.textSecondary
+    color: color.textSecondary
   },
   recentInfo: {
     flex: 1,
@@ -255,17 +257,17 @@ const styles = StyleSheet.create({
   recentName: {
     fontSize: 16,
     fontWeight: '500' as const,
-    color: colors.light.text,
+    color: color.text,
     marginBottom: 2
   },
   recentGeneric: {
     fontSize: 13,
-    color: colors.light.textSecondary
+    color: color.textSecondary
   },
   recentItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.light.surface,
+    backgroundColor: color.surface,
     padding: 12,
     borderRadius: 12,
     marginBottom: 8
@@ -279,14 +281,14 @@ const styles = StyleSheet.create({
   emptyStateText: {
     fontSize: 18,
     fontWeight: '600' as const,
-    color: colors.light.text,
+    color: color.text,
     textAlign: 'center',
     marginTop: 16,
     marginBottom: 8
   },
   emptyStateSubtitle: {
     fontSize: 15,
-    color: colors.light.textSecondary,
+    color: color.textSecondary,
     textAlign: 'center',
     lineHeight: 22
   },
